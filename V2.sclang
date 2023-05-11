@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ASCII"?>
+<sclang:ContractLanguage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  xmlns:sclang="http://www.example.org/sclang">
+  <scontract scName="Vehicle-Auction" targetPlatform="Ethereum">
+    <element xsi:type="sclang:Participant" name="Owner" creator="true">
+      <relationship xsi:type="sclang:TranRel" to="//@scontract.0/@element.1" from="//@scontract.0/@element.0"/>
+      <element xsi:type="sclang:Parameter" name="asdf" list="string" type="datetime"/>
+    </element>
+    <element xsi:type="sclang:Transaction" name="ChangeOwner">
+      <relationship xsi:type="sclang:AssetRel" to="//@scontract.0/@element.4" from="//@scontract.0/@element.1"/>
+    </element>
+    <element xsi:type="sclang:Transaction" name="Place-bid">
+      <relationship xsi:type="sclang:AssetRel" to="//@scontract.0/@element.4" from="//@scontract.0/@element.2">
+        <events name="new-bid"/>
+      </relationship>
+    </element>
+    <element xsi:type="sclang:Participant" name="Bidder">
+      <relationship xsi:type="sclang:TranRel" to="//@scontract.0/@element.2" from="//@scontract.0/@element.3"/>
+    </element>
+    <element xsi:type="sclang:Asset" name="Vehicle" list="string" type="string">
+      <element xsi:type="sclang:Parameter" name="Name" list="string" type="string"/>
+      <element xsi:type="sclang:Parameter" name="bidAmount" list="string" type="long"/>
+    </element>
+  </scontract>
+</sclang:ContractLanguage>

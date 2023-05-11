@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sclang:ContractLanguage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:sclang="http://www.example.org/sclang">
+  <scontract scName="Test Results">
+    <element xsi:type="sclang:Participant" name="Parents" creator="true">
+      <relationship xsi:type="sclang:TranRel" to="//@scontract.0/@element.3" from="//@scontract.0/@element.0" selected="true"/>
+    </element>
+    <element xsi:type="sclang:Participant" name="Teacher">
+      <relationship xsi:type="sclang:TranRel" to="//@scontract.0/@element.5" from="//@scontract.0/@element.1"/>
+    </element>
+    <element xsi:type="sclang:Participant" name="Student">
+      <relationship xsi:type="sclang:TranRel" to="//@scontract.0/@element.6" from="//@scontract.0/@element.2"/>
+    </element>
+    <element xsi:type="sclang:Transaction" name="Create Contract">
+      <relationship xsi:type="sclang:AssetRel" to="//@scontract.0/@element.4" from="//@scontract.0/@element.3"/>
+      <element xsi:type="sclang:Parameter" name="Amount" list="string" type="money"/>
+      <element xsi:type="sclang:Parameter" name="Receiver" list="string" type="Student"/>
+    </element>
+    <element xsi:type="sclang:Asset" name="Contract" list="string" type="string">
+      <element xsi:type="sclang:Parameter" name="Amount" list="string" type="money"/>
+      <element xsi:type="sclang:Parameter" name="Grade" list="string" type="string"/>
+    </element>
+    <element xsi:type="sclang:Transaction" name="Set Grade">
+      <relationship xsi:type="sclang:AssetRel" to="//@scontract.0/@element.4" from="//@scontract.0/@element.5">
+        <events description="Send notification about the new grade" name="New Grade"/>
+      </relationship>
+      <element xsi:type="sclang:Parameter" name="Grade" list="string" type="string"/>
+      <condition xsi:type="sclang:Pre" name="Check Grade" condition="The input grade can't be empty"/>
+    </element>
+    <element xsi:type="sclang:Transaction" name="Withdraw Amount">
+      <relationship xsi:type="sclang:AssetRel" to="//@scontract.0/@element.4" from="//@scontract.0/@element.6">
+        <events description="Send a message telling that the money was receive" name="Money Withdrawn"/>
+      </relationship>
+      <condition xsi:type="sclang:Pre" name="Check Grade" condition="The grade needs to be an &quot;A&quot;"/>
+      <condition xsi:type="sclang:Pre" name="Check Amount" condition="The amount needs to be greater than zero"/>
+    </element>
+  </scontract>
+</sclang:ContractLanguage>

@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="sclang" nsURI="http://www.example.org/sclang" nsPrefix="sclang">
+  <eClassifiers xsi:type="ecore:EClass" name="Asset" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Rule" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="participant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="read" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="update" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="resource" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allow" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="deny" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="allresource" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="all" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="transaction" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Parameter" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="identifier" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Transaction" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="condition" upperBound="-1"
+        eType="#//Condition" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" upperBound="-1"
+        eType="#//Operation" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Element" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="relationship" upperBound="-1"
+        eType="#//Relationship" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" upperBound="-1"
+        eType="#//Element" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="list" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Participant" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="creator" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TargetedPlatform">
+    <eLiterals name="IBM"/>
+    <eLiterals name="Azure" value="1"/>
+    <eLiterals name="Ethereum" value="2"/>
+    <eLiterals name="DAML" value="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContractLanguage">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="conLanName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scontract" upperBound="-1"
+        eType="#//SContract" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SContract">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="scName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="targetPlatform" eType="#//TargetedPlatform"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="element" upperBound="-1"
+        eType="#//Element" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Relationship" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="to" lowerBound="1" eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="from" lowerBound="1" eType="#//Element"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="events" upperBound="-1"
+        eType="#//Events" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="ParType">
+    <eLiterals name="string" literal="Letters"/>
+    <eLiterals name="integer" value="1" literal="Numbers ( 0 - 2,147,483,647 )"/>
+    <eLiterals name="long" value="2" literal="Numbers ( 0 - 9,223,372,036,854,775,807 )"/>
+    <eLiterals name="double" value="3" literal="Decimal Numbers"/>
+    <eLiterals name="datetime" value="4" literal="Date"/>
+    <eLiterals name="boolean" value="5" literal="True of False statement"/>
+    <eLiterals name="address" literal="Participant address"/>
+    <eLiterals name="array" value="1" literal="List"/>
+    <eLiterals name="contract" value="3" literal="Smart Contract"/>
+    <eLiterals name="money" value="6" literal="Money"/>
+    <eLiterals name="state" value="7" literal="Smart Contract State"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Events">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Pre" eSuperTypes="#//Condition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Post" eSuperTypes="#//Condition"/>
+  <eClassifiers xsi:type="ecore:EClass" name="Condition" abstract="true">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="condition" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AssetRel" eSuperTypes="#//Relationship">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="participant" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="create" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="read" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="update" eType="ecore:EDataType http://www.eclipse.org/emf/2003/XMLType#//Boolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="delete" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="all" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TranRel" eSuperTypes="#//Relationship">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="selected" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="TranType">
+    <eLiterals name="Default"/>
+    <eLiterals name="Transfer" value="1"/>
+    <eLiterals name="Set" value="2"/>
+    <eLiterals name="Get" value="3"/>
+    <eLiterals name="Mathematical" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="MathFunctions">
+    <eLiterals name="Add"/>
+    <eLiterals name="Subtract" value="1"/>
+    <eLiterals name="Multiply" value="2"/>
+    <eLiterals name="Divide" value="3"/>
+    <eLiterals name="Mod" value="4"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Variable">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aux" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="aux2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Operation">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="type" eType="#//TranType"
+        defaultValueLiteral="Default"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="variable" upperBound="-1"
+        eType="#//Variable" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Role" eSuperTypes="#//Element">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="participant" upperBound="-1"
+        eType="#//Participant"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="transaction" upperBound="-1"
+        eType="#//Transaction"/>
+  </eClassifiers>
+</ecore:EPackage>
